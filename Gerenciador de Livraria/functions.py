@@ -1,9 +1,13 @@
 import os
 import sqlite3
+from time import process_time, process_time_ns
+from traceback import print_tb
+
 import pandas as pd
 import csv
 import shutil
 from datetime import datetime
+import textwrap
 
 def criar_diretorios():
     os.makedirs('./meu_sistema_livraria/data', exist_ok=True)
@@ -65,6 +69,39 @@ def tira_backup():
 def backup():
     criar_backup()
     tira_backup()
+
+def relatorio():
+    while True:
+        selecao = int(input(textwrap.dedent(f'''
+            {'-'*15} GERAR RELATÓRIO {'-'*15}
+            
+            [1] Gerar em HTML
+            [2] Gerar em XML
+            [3] Sair
+            
+            Digite o número desejado: ''')))
+
+        if selecao == 1:
+            try:
+                arquivo = pd.read_csv('./meu_sistema_livraria/exports/livros_exportados.csv')
+                arquivo.to_html('./meu_sistema_livraria/exports/livros_exportados.html')
+                print('Arquivo HTML gerado com sucesso!')
+            except FileNotFoundError:
+                print('Gere um arquivo CSV primeiro!')
+
+        elif selecao == 2:
+            try:
+                arquivo = pd.read_csv('./meu_sistema_livraria/exports/livros_exportados.csv')
+                arquivo.to_xml('./meu_sistema_livraria/exports/livros_exportados.xml', parser='etree')
+                print('Arquivo XML gerado com sucesso!')
+            except FileNotFoundError:
+                print('Gere um arquivo CSV primeiro!')
+
+        elif selecao == 3:
+            break
+
+        else:
+            print('\nA opção não é válida! Digite novamente o número.')
 
 def fechar_conexao(conexao):
     conexao.close()

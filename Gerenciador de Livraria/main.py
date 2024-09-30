@@ -20,7 +20,8 @@ def main():
                 [6] Exportar dados para CSV
                 [7] Importar dados de CSV
                 [8] Fazer backup do banco de dados
-                [9] Sair
+                [9] Gerar relatório
+                [10] Sair
                     
                 Digite o número desejado: """)))
 
@@ -89,7 +90,8 @@ def main():
                             break
                         else:
                             print('O título digitado não foi encontrado. Digite novamente.')
-                except ValueError: print('Digite um valor válido!')
+                except ValueError:
+                    print('Digite um valor válido!')
 
             elif selecao == 4:
                 print(f'\n{'-' * 15} DELETAR LIVRO {'-' * 15}')
@@ -169,13 +171,16 @@ def main():
                         print('Dados inseridos no banco de dados com sucesso!')
                         functions.backup()
                         conexao.commit()
-                    except ValueError:
+                    except FileNotFoundError:
                         print('Arquivo não encontrado!')
 
             elif selecao == 8:
                 functions.backup()
 
-            elif selecao == 9: break
+            elif selecao == 9:
+                functions.relatorio()
+
+            elif selecao == 10: break
 
             else:
                 print('\nA opção não é válida! Digite novamente o número.')

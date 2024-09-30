@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+  <row>
+    <index>0</index>
+    <id>1</id>
+    <titulo>AAA</titulo>
+    <autor>Laura</autor>
+    <ano_publicado>2024</ano_publicado>
+    <preço>40.9</preço>
+  </row>
+</data>
